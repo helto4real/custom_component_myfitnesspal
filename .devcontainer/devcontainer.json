@@ -1,0 +1,24 @@
+// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+{
+	"context": "..",
+	"dockerFile": "Dockerfile",
+	"appPort": "8124:8123",
+	"runArgs": [
+		"-e",
+		"GIT_EDTIOR='code --wait'"
+	],
+	"postCreateCommand": "printf \"# insert password here \npassword: yourpassword\" > /workspaces/custom_component_myfitnesspal/.devcontainer/secrets.yaml",
+	"extensions": [
+		"ms-python.python"
+	],
+	"settings": {
+		"python.pythonPath": "/usr/local/bin/python",
+		"python.linting.pylintEnabled": true,
+		"python.linting.enabled": true,
+		"python.formatting.provider": "black",
+		"editor.formatOnPaste": false,
+		"editor.formatOnSave": true,
+		"editor.formatOnType": true,
+		"files.trimTrailingWhitespace": true
+	}
+}

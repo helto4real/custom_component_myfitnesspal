@@ -1,0 +1,19 @@
+{
+    "config": {
+        "title": "Myfitnesspal",
+        "step": {
+            "user": {
+                "title": "Enter Name and credentials",
+                "data": {
+                    "name": "Name",
+                    "user_name": "User name",
+                    "password": "Password"
+                }
+            }
+        },
+        "error": {
+            "name_exists": "Name already exists",
+            "wrong_credentials": "Wrong username or password!"
+        }
+    }
+}

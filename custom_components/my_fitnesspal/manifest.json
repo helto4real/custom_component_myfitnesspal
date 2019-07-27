@@ -1,0 +1,13 @@
+{
+  "domain": "my_fitnesspal",
+  "name": "myfitnesspal",
+  "config_flow": true,
+  "documentation": "https://github.com/helto4real/custom_component_myfitnesspal",
+  "dependencies": [],
+  "codeowners": [
+    "@helto4real"
+  ],
+  "requirements": [
+    "myfitnesspal==1.13.3"
+  ]
+}

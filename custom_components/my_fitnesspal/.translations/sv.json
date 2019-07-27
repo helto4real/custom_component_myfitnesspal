@@ -1,0 +1,19 @@
+{
+    "config": {
+        "title": "Myfitnesspal",
+        "step": {
+            "user": {
+                "title": "Skriv namn och kontouppgifter",
+                "data": {
+                    "name": "Namn",
+                    "user_name": "Användarnamn",
+                    "password": "Lösenord"
+                }
+            }
+        },
+        "error": {
+            "name_exists": "Namnet finns redan!",
+            "wrong_credentials": "Fel användarnamn eller lösenord!"
+        }
+    }
+}
