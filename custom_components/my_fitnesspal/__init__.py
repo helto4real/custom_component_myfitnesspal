@@ -43,7 +43,6 @@ async def async_setup_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> b
     password = config_entry.data.get(CONF_PASSWORD)
     display_name = config_entry.data.get(CONF_NAME)
 
-    _LOGGER.error("MFP Got name %s", display_name)
     coordinator = MyFitnessPalDataUpdateCoordinator(
         hass, username=username, password=password, display_name=display_name
     )
@@ -115,10 +114,8 @@ class MyFitnessPalDataUpdateCoordinator(DataUpdateCoordinator):
     async def _async_update_data(self):
         """Update data via library."""
         try:
-            _LOGGER.error("MFP: Update data")
             data = await self.hass.async_add_executor_job(self.update_data_sync)
-            # data = await self.update_data_sync()
-            return data  # .get("data", {})
+            return data
         except Exception as exception:
             raise UpdateFailed(exception)
 
