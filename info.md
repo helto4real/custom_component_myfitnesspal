@@ -7,15 +7,7 @@ This custom component gets fitnessdata from your account. Please advice that the
 Check under configuration/integrations. Add the `Myfitnesspal` integration.
 
 ### Configure with old school yaml
-You can setup through configuration.yaml:
-
-```yaml
-sensor:
-  - platform: my_fitnesspal
-    name: name                # The name of sensor
-    username: my_username     # Your user name at myfitnesspal
-    password: my_password     # Your password
-```
+Not supported
 
 ### Configuration properties
 |property|description|
