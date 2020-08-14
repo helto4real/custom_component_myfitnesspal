@@ -6,7 +6,7 @@
                 "title": "Enter Name and credentials",
                 "data": {
                     "name": "Name",
-                    "user_name": "User name",
+                    "username": "User name",
                     "password": "Password"
                 }
             }

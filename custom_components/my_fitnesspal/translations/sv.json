@@ -6,7 +6,7 @@
                 "title": "Skriv namn och kontouppgifter",
                 "data": {
                     "name": "Namn",
-                    "user_name": "Användarnamn",
+                    "username": "Användarnamn",
                     "password": "Lösenord"
                 }
             }

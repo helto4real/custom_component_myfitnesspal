@@ -42,13 +42,13 @@ async def async_setup_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> b
     username = config_entry.data.get(CONF_USERNAME)
     password = config_entry.data.get(CONF_PASSWORD)
     display_name = config_entry.data.get(CONF_NAME)
-    
+
     # Lib does I/O in the init...
     def wrap_client():
         """Wrap the fitnesspal client."""
         return ext_myfitnesspal.Client(username, password)
-    
-    client = await self.hass.async_add_executor_job(wrap_client)
+
+    client = await hass.async_add_executor_job(wrap_client)
 
     coordinator = MyFitnessPalDataUpdateCoordinator(
         hass, client=client, display_name=display_name
@@ -104,7 +104,7 @@ class MyFitnessPalDataUpdateCoordinator(DataUpdateCoordinator):
     ):
         """Initialize."""
 
-        self.client = username
+        self.client = client
         self.display_name = display_name
 
         if len(self.display_name) == 0:
