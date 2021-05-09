@@ -1,4 +1,4 @@
-FROM python:3.7-stretch
+FROM mcr.microsoft.com/vscode/devcontainers/python:0-3.8
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -6,7 +6,7 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN python -m pip install --upgrade colorlog black pylint pytest pytest-cov aiohttp pytest-asyncio myfitnesspal
+RUN python -m pip install --upgrade ciso8601 colorlog black pylint pytest pytest-cov aiohttp pytest-asyncio myfitnesspal
 RUN python -m pip install --upgrade git+git://github.com/home-assistant/home-assistant.git@dev
 RUN cd && mkdir -p /config/custom_components
 
