@@ -4,8 +4,8 @@ logger:
   logs:
     custom_components.myfitnesspal: debug
 
-ptvsd:
-#  wait: True
+# Remove if debug needed
+# debugpy:
 
 # Setup old school or through integrations
 # sensor:
