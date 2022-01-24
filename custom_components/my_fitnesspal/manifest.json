@@ -9,6 +9,6 @@
   ],
   "version": "0.9.0",
   "requirements": [
-    "myfitnesspal==1.16.4"
+    "myfitnesspal==1.16.6"
   ]
 }
