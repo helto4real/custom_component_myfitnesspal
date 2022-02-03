@@ -61,17 +61,7 @@ class MyFitnessPalSensor(MyFitnessPalEntity):
     def state(self):
         """Return the state of the sensor."""
         if len(self.coordinator.data) > 0:
-            return round(
-                (
-                    self.coordinator.data.get("total_calories")
-                    / (
-                        self.coordinator.data.get("goal_calories")
-                        + self.coordinator.data.get("cardio_calories_burned")
-                    )
-                )
-                * 100,
-                0,
-            )
+            return self.coordinator.data.get("weight")
         else:
             self._available = False
             return STATE_UNAVAILABLE
@@ -84,4 +74,4 @@ class MyFitnessPalSensor(MyFitnessPalEntity):
     @property
     def unit_of_measurement(self):
         """Return the units of measurement."""
-        return "%"
+        return "lb"

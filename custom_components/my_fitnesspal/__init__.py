@@ -21,7 +21,7 @@ import myfitnesspal as ext_myfitnesspal
 from .const import DOMAIN, STARTUP_MESSAGE, PLATFORMS, ATTRIBUTION
 
 
-SCAN_INTERVAL = timedelta(minutes=30)
+SCAN_INTERVAL = timedelta(minutes=5)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -132,6 +132,8 @@ class MyFitnessPalDataUpdateCoordinator(DataUpdateCoordinator):
         info = self.client.get_date(today.year, today.month, today.day)
 
         weights = self.client.get_measurements("Weight")
+        latest_record = weights.popitem(last=False)
+        latest_weight = latest_record[1]
 
         goal_calories = info.goals.get("calories", 0)
         goal_carbohydrates = info.goals.get("carbohydrates", 0)
@@ -161,7 +163,7 @@ class MyFitnessPalDataUpdateCoordinator(DataUpdateCoordinator):
         result["goal_sodium"] = goal_sodium
         result["goal_sugar"] = goal_sugar
         result["goal_protein"] = goal_protein
-
+        
         result["total_calories"] = total_calories
         result["total_carbohydrates"] = total_carbohydrates
         result["total_fat"] = total_fat
@@ -171,7 +173,22 @@ class MyFitnessPalDataUpdateCoordinator(DataUpdateCoordinator):
 
         result["cardio_calories_burned"] = cardio_calories_burned
         result["water"] = water
-        result["weight"] = weight
+        result["weight"] = latest_weight
+        result["cal_remaining"] = goal_calories - total_calories
+        result["cal_remaining_ex_workout"] = goal_calories - total_calories - cardio_calories_burned
+        result["cal_goal"] = goal_calories - cardio_calories_burned
+        result["goal_pct"] = round(
+                (
+                    total_calories
+                    / (
+                        goal_calories
+                        + cardio_calories_burned
+                    )
+                )
+                * 100,
+                0,
+            )
+
 
         result[ATTR_ATTRIBUTION] = ATTRIBUTION
 
