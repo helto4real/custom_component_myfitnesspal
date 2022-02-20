@@ -1,8 +1,8 @@
-FROM mcr.microsoft.com/vscode/devcontainers/python:0-3.8
+FROM mcr.microsoft.com/vscode/devcontainers/python:0-3.9
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        git \
+    git \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
