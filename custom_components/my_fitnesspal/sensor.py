@@ -74,4 +74,4 @@ class MyFitnessPalSensor(MyFitnessPalEntity):
     @property
     def unit_of_measurement(self):
         """Return the units of measurement."""
-        return "lb"
+        return self.coordinator.unit_of_weight

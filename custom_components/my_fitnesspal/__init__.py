@@ -106,6 +106,7 @@ class MyFitnessPalDataUpdateCoordinator(DataUpdateCoordinator):
 
         self.client = client
         self.display_name = display_name
+        self.unit_of_weight = "kg" if hass.config.units.is_metric else "lb"
 
         if len(self.display_name) == 0:
             self.display_name = self._username
@@ -113,7 +114,10 @@ class MyFitnessPalDataUpdateCoordinator(DataUpdateCoordinator):
         self.platforms = []
 
         super().__init__(
-            hass, _LOGGER, name=DOMAIN, update_interval=SCAN_INTERVAL,
+            hass,
+            _LOGGER,
+            name=DOMAIN,
+            update_interval=SCAN_INTERVAL,
         )
 
     async def _async_update_data(self):
@@ -133,7 +137,10 @@ class MyFitnessPalDataUpdateCoordinator(DataUpdateCoordinator):
 
         weights = self.client.get_measurements("Weight")
         latest_record = weights.popitem(last=False)
-        latest_weight = latest_record[1]
+        if len(latest_record) > 1:
+            latest_weight = latest_record[1]
+        else:
+            latest_weight = 0
 
         goal_calories = info.goals.get("calories", 0)
         goal_carbohydrates = info.goals.get("carbohydrates", 0)
@@ -149,7 +156,7 @@ class MyFitnessPalDataUpdateCoordinator(DataUpdateCoordinator):
         total_sugar = info.totals.get("sugar", 0)
         total_protein = info.totals.get("protein", 0)
         water = info.water
-        _, weight = list(weights.items())[0] if len(weights) > 0 else 0,0
+        _, weight = list(weights.items())[0] if len(weights) > 0 else 0, 0
 
         cardio_calories_burned = 0
         for exercise in info.exercises[0]:
@@ -163,7 +170,7 @@ class MyFitnessPalDataUpdateCoordinator(DataUpdateCoordinator):
         result["goal_sodium"] = goal_sodium
         result["goal_sugar"] = goal_sugar
         result["goal_protein"] = goal_protein
-        
+
         result["total_calories"] = total_calories
         result["total_carbohydrates"] = total_carbohydrates
         result["total_fat"] = total_fat
@@ -175,20 +182,14 @@ class MyFitnessPalDataUpdateCoordinator(DataUpdateCoordinator):
         result["water"] = water
         result["weight"] = latest_weight
         result["cal_remaining"] = goal_calories - total_calories
-        result["cal_remaining_ex_workout"] = goal_calories - total_calories - cardio_calories_burned
+        result["cal_remaining_ex_workout"] = (
+            goal_calories - total_calories - cardio_calories_burned
+        )
         result["cal_goal"] = goal_calories - cardio_calories_burned
         result["goal_pct"] = round(
-                (
-                    total_calories
-                    / (
-                        goal_calories
-                        + cardio_calories_burned
-                    )
-                )
-                * 100,
-                0,
-            )
-
+            (total_calories / (goal_calories + cardio_calories_burned)) * 100,
+            0,
+        )
 
         result[ATTR_ATTRIBUTION] = ATTRIBUTION
 
