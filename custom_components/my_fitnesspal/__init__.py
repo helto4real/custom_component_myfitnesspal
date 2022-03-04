@@ -132,15 +132,14 @@ class MyFitnessPalDataUpdateCoordinator(DataUpdateCoordinator):
         """Get the actual data from the API"""
 
         today = date.today()
+        latest_weight = 0
 
         info = self.client.get_date(today.year, today.month, today.day)
-
         weights = self.client.get_measurements("Weight")
-        latest_record = weights.popitem(last=False)
-        if len(latest_record) > 1:
-            latest_weight = latest_record[1]
-        else:
-            latest_weight = 0
+        if len(weights) > 0:
+            latest_record = weights.popitem(last=False)
+            if len(latest_record) > 1:
+                latest_weight = latest_record[1]
 
         goal_calories = info.goals.get("calories", 0)
         goal_carbohydrates = info.goals.get("carbohydrates", 0)
