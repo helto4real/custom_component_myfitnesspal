@@ -179,6 +179,15 @@ class MyFitnessPalDataUpdateCoordinator(DataUpdateCoordinator):
 
         result = {}
 
+        for meal in info.meals:
+            meal_name = meal._name.replace(" ", "")
+            result["meal_" + meal_name + "_calories"] = meal.totals.get("calories")
+#            result["meal_" + meal_name + "_carbohydrates"] = meal.totals.get("carbohydrates")
+#            result["meal_" + meal_name + "_protein"] = meal.totals.get("protein")            
+#            result["meal_" + meal_name + "_fat"] = meal.totals.get("fat")
+#            result["meal_" + meal_name + "_sodium"] = meal.totals.get("sodium")            
+#            result["meal_" + meal_name + "_sugar"] = meal.totals.get("sugar")
+
         result["goal_calories"] = goal_calories
         result["goal_kilojoules"] = goal_kilojoules
         result["goal_carbohydrates"] = goal_carbohydrates
