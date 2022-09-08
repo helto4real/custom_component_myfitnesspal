@@ -27,6 +27,5 @@ Not supported
 
 
 ## HACS component
-You can use HACS [Se this link for more information](https://github.com/custom-components/hacs). Add `https://github.com/helto4real/custom_component_myfitnesspal` to custom repository under `SETTINGS`. Select integration as type.
+*THIS COMPONENT IS REMOVED FROM HACS UNITL FURTHER NOTICE.*
 
-Configure through the integrations page or old school yaml as described above.
