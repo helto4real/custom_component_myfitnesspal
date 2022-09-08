@@ -1,3 +1,7 @@
+# ATTENTION
+MyFitnesspal has change their login so this component does not work anymore. At this time there are no solution until the underlying scraping API used is updated.
+Sorry for the inconvenience.
+
 # Myfitnesspal custom component
 This custom component gets fitness data from your account. Please note that the component uses an underlying scraping API that can change at any time and use at your own risk. **The author takes no liability of usage**.
 
